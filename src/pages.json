@@ -1,5 +1,5 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https:/app.dcloud.io/collocation/pages
 		{
 			"path": "pages/index/index",
 			"style": {
@@ -11,6 +11,24 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+		"usingComponents": {
+			"t-row": "/wxcomponents/miniprogram_dist/row/row",
+			"t-col": "/wxcomponents/miniprogram_dist/col/col",
+			"t-button": "/wxcomponents/miniprogram_dist/button/button",
+			"t-search": "/wxcomponents/miniprogram_dist/search/search",
+			"t-icon": "/wxcomponents/miniprogram_dist/icon/icon",
+			"t-cell": "/wxcomponents/miniprogram_dist/cell/cell",
+			"t-image": "/wxcomponents/miniprogram_dist/image/image",
+			"t-loading": "/wxcomponents/miniprogram_dist/loading/loading",
+			"t-popup": "/wxcomponents/miniprogram_dist/popup/popup",
+			"t-radio-group": "/wxcomponents/miniprogram_dist/radio-group/radio-group",
+			"t-radio": "/wxcomponents/miniprogram_dist/radio/radio",
+			"t-overlay": "/wxcomponents/miniprogram_dist/overlay/overlay",
+			"t-dialog": "/wxcomponents/miniprogram_dist/dialog/dialog",
+			"t-tabs": "/wxcomponents/miniprogram_dist/tabs/tabs",
+			"t-tab-panel": "/wxcomponents/miniprogram_dist/tab-panel/tab-panel",
+			"t-calendar": "/wxcomponents/miniprogram_dist/calendar/calendar"
+		}
 	}
 }

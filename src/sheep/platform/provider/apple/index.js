@@ -4,6 +4,6 @@ import service from './app';
 
 let apple = {};
 if (typeof service !== 'undefined') {
-  apple = service;
+    apple = service;
 }
 export default apple;

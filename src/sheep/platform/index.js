@@ -10,11 +10,13 @@
  */
 
 import { isEmpty } from 'lodash';
+
 // #ifdef H5
 import { isWxBrowser } from '@/sheep/helper/utils';
+
+import apple from './provider/apple';
 // #endif
 import wechat from './provider/wechat/index.js';
-import apple from './provider/apple';
 import share from './share';
 
 const device = uni.getSystemInfoSync();
@@ -28,12 +30,12 @@ let isWechatInstalled = true;
 
 // #ifdef H5
 if (isWxBrowser()) {
-  name = 'WechatOfficialAccount';
-  provider = 'wechat';
-  platform = 'officialAccount';
+    name = 'WechatOfficialAccount';
+    provider = 'wechat';
+    platform = 'officialAccount';
 } else {
-  name = 'H5';
-  platform = 'h5';
+    name = 'H5';
+    platform = 'h5';
 }
 // #endif
 
@@ -42,7 +44,7 @@ name = 'App';
 platform = 'openPlatform';
 // 检查微信客户端是否安装，否则AppleStore会因此拒绝上架
 if (os === 'ios') {
-  isWechatInstalled = plus.ios.import('WXApi').isWXAppInstalled();
+    isWechatInstalled = plus.ios.import('WXApi').isWXAppInstalled();
 }
 // #endif
 
@@ -53,24 +55,24 @@ provider = 'wechat';
 // #endif
 
 if (isEmpty(name)) {
-  uni.showToast({
-    title: '暂不支持该平台',
-    icon: 'none',
-  });
+    uni.showToast({
+        title: '暂不支持该平台',
+        icon: 'none',
+    });
 }
 
 // 加载当前平台前置行为
 const load = () => {
-  if (provider === 'wechat') {
-    wechat.load();
-  }
+    if (provider === 'wechat') {
+        wechat.load();
+    }
 };
 
 // 使用厂商独占sdk name = 'wechat' | 'alipay' | 'apple'
 const useProvider = (_provider = '') => {
-  if (_provider === '') _provider = provider;
-  if (_provider === 'wechat') return wechat;
-  if (_provider === 'apple') return apple;
+    if (_provider === '') _provider = provider;
+    if (_provider === 'wechat') return wechat;
+    if (_provider === 'apple') return apple;
 };
 
 /**
@@ -78,14 +80,14 @@ const useProvider = (_provider = '') => {
  * @param {Boolean} silence - 静默检查
  */
 const checkUpdate = (silence = false) => {
-  let canUpdate;
-  // #ifdef MP-WEIXIN
-  useProvider().checkUpdate(silence);
-  // #endif
+    let canUpdate;
+    // #ifdef MP-WEIXIN
+    useProvider().checkUpdate(silence);
+    // #endif
 
-  // #ifdef APP-PLUS
-  // TODO: 热更新
-  // #endif
+    // #ifdef APP-PLUS
+    // TODO: 热更新
+    // #endif
 };
 
 /**
@@ -93,76 +95,76 @@ const checkUpdate = (silence = false) => {
  * @param {Boolean} silence - 静默检查
  */
 async function checkNetwork() {
-  const networkStatus = await uni.getNetworkType();
-  if (networkStatus.networkType == 'none') {
-    return Promise.resolve(false);
-  }
-  return Promise.resolve(true);
+    const networkStatus = await uni.getNetworkType();
+    if (networkStatus.networkType == 'none') {
+        return Promise.resolve(false);
+    }
+    return Promise.resolve(true);
 }
 
 // 获取小程序胶囊信息
 const getCapsule = () => {
-  // #ifdef MP
-  let capsule = uni.getMenuButtonBoundingClientRect();
-  if (!capsule) {
-    capsule = {
-      bottom: 56,
-      height: 32,
-      left: 278,
-      right: 365,
-      top: 24,
-      width: 87,
-    };
-  }
-  return capsule;
-  // #endif
+    // #ifdef MP
+    let capsule = uni.getMenuButtonBoundingClientRect();
+    if (!capsule) {
+        capsule = {
+            bottom: 56,
+            height: 32,
+            left: 278,
+            right: 365,
+            top: 24,
+            width: 87,
+        };
+    }
+    return capsule;
+    // #endif
 
-  // #ifndef MP
-  return {
-    bottom: 56,
-    height: 32,
-    left: 278,
-    right: 365,
-    top: 24,
-    width: 87,
-  };
-  // #endif
+    // #ifndef MP
+    return {
+        bottom: 56,
+        height: 32,
+        left: 278,
+        right: 365,
+        top: 24,
+        width: 87,
+    };
+    // #endif
 };
 
 const capsule = getCapsule();
 
 // 标题栏高度
 const getNavBar = () => {
-  return device.statusBarHeight + 44;
+    return device.statusBarHeight + 44;
 };
 const navbar = getNavBar();
 
 function getLandingPage() {
-  let page = '';
-  // #ifdef H5
-  page = location.href.split('?')[0];
-  // #endif
-  return page;
+    let page = '';
+    // #ifdef H5
+    page = location.href.split('?')[0];
+    // #endif
+    return page;
 }
 
 // 设置ios+公众号网页落地页 解决微信sdk签名问题
 const landingPage = getLandingPage();
 
 const _platform = {
-  name,
-  device,
-  os,
-  provider,
-  platform,
-  useProvider,
-  checkUpdate,
-  checkNetwork,
-  share,
-  load,
-  capsule,
-  navbar,
-  landingPage,
-  isWechatInstalled,
+    name,
+    device,
+    os,
+    provider,
+    platform,
+    useProvider,
+    checkUpdate,
+    checkNetwork,
+    share,
+    load,
+    capsule,
+    navbar,
+    landingPage,
+    isWechatInstalled,
 };
 
 export default _platform;

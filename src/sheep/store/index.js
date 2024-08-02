@@ -5,16 +5,16 @@ import piniaPersist from 'pinia-plugin-persist-uni';
 const files = import.meta.globEager('./*.js');
 const modules = {};
 Object.keys(files).forEach((key) => {
-  modules[key.replace(/(.*\/)*([^.]+).*/gi, '$2')] = files[key].default;
+    modules[key.replace(/(.*\/)*([^.]+).*/gi, '$2')] = files[key].default;
 });
 
 export const setupPinia = (app) => {
-  const pinia = createPinia();
-  pinia.use(piniaPersist);
+    const pinia = createPinia();
+    pinia.use(piniaPersist);
 
-  app.use(pinia);
+    app.use(pinia);
 };
 
 export default (name) => {
-  return modules[name]();
+    return modules[name]();
 };

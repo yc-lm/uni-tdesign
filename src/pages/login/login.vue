@@ -6,18 +6,15 @@
 -->
 
 <template>
-  <div>login</div>
+    <div>login</div>
 </template>
 
 <script>
-export default {
-  name: "login"
-}
+    export default {
+        name: 'Login',
+    };
 </script>
 
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

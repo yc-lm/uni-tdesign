@@ -1,5 +1,6 @@
-import {isArray, isNull, isUndefined} from "lodash";
-import {isString} from "@/sheep/helper/utils";
+import { isArray, isNull, isUndefined } from 'lodash';
+import isString from 'lodash/isString';
+
 import sheep from '@/sheep';
 
 export const OK = 'OK';
@@ -15,16 +16,18 @@ export const OK = 'OK';
  * @return {Promise<any>} 传入默认值，则出错时，resolve 默认值；不传，则出错时，reject 错误数据，需要 catch 处理
  */
 export function apiSimpleWrapper({
-                                     api,
-                                     params,
-                                     defaultValue,
-                                     notifyError = false,
-                                     isPostSuccessMsg = false,
-                                     toastDuration = 2000
-                                 }) {
+    api,
+    params,
+    defaultValue,
+    notifyError = false,
+    isPostSuccessMsg = false,
+    toastDuration = 2000,
+}) {
+    // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {
         try {
-            let {error, value, msg} = await api(params).catch(error => {
+            // eslint-disable-next-line prefer-const
+            let { error, value, msg } = await api(params).catch((error) => {
                 if (isUndefined(defaultValue)) {
                     reject(error);
                 } else {
@@ -32,14 +35,17 @@ export function apiSimpleWrapper({
                 }
                 if (notifyError) {
                     const errorMsg = error === 'ECONNABORTED' ? '等待超时' : error;
-                    sheep.$helper.toast(errorMsg ? errorMsg : '操作失败',toastDuration);
+                    sheep.$helper.toast(errorMsg || '操作失败', toastDuration);
                 }
             });
             // 兼容msg为空
-            msg = msg ? msg : isString(value) ? value : isArray(value) && value.length ? value[0] : '操作失败';
+            msg =
+                msg ||
+                // eslint-disable-next-line no-nested-ternary
+                (isString(value) ? value : isArray(value) && value.length ? value[0] : '操作失败');
             if (error === OK && !isUndefined(value) && !(isNull(value) && !isArray(value))) {
                 if (isPostSuccessMsg) {
-                    sheep.$helper.toast('操作成功',toastDuration);
+                    sheep.$helper.toast('操作成功', toastDuration);
                 }
                 resolve(value);
             } else {
@@ -49,7 +55,7 @@ export function apiSimpleWrapper({
                     resolve(defaultValue);
                 }
                 if (notifyError) {
-                    sheep.$helper.toast(msg,toastDuration);
+                    sheep.$helper.toast(msg, toastDuration);
                 }
             }
         } catch (e) {
@@ -57,7 +63,6 @@ export function apiSimpleWrapper({
         }
     });
 }
-
 
 // 主平台
 export const REQUEST_PLATFORM_MAIN = 'REQUEST_PLATFORM_MAIN';
@@ -71,8 +76,8 @@ export const REQUEST_PLATFORM_USER = 'REQUEST_PLATFORM_USER';
 export const REQUEST_PLATFORM_TYPES = {
     REQUEST_PLATFORM_MAIN,
     REQUEST_PLATFORM_AUTH,
-    REQUEST_PLATFORM_USER
-}
+    REQUEST_PLATFORM_USER,
+};
 
 export function concatProtocol(url, https = true) {
     if (url?.includes('http')) {
@@ -83,8 +88,8 @@ export function concatProtocol(url, https = true) {
 }
 
 export function useApi() {
-    return {}
+    return {};
 }
 
-export const URL = '/bmd/jsonApi.php'
-export const RS_URL = '/app'
+export const URL = '/bmd/jsonApi.php';
+export const RS_URL = '/app';

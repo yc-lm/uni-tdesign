@@ -4,13 +4,14 @@
  */
 
 import Request from 'luch-request';
-import { baseUrl, apiPath, authApiPath, userApiPath, authPlatformUrl } from '@/sheep/config';
-import $store from '@/sheep/store';
-import $platform from '@/sheep/platform';
-import { showAuthModal } from '@/sheep/hooks/useModal';
-import { REQUEST_PLATFORM_TYPES, concatProtocol } from '@/sheep/hooks/useApi';
-import { removeAllStorage, USER_KEY_OBJ, USER_LOGIN_TYPE_OBJ } from '@/sheep/hooks/useLogin';
+
 import sheep from '@/sheep';
+import { apiPath, authApiPath, authPlatformUrl, baseUrl, userApiPath } from '@/sheep/config';
+import { concatProtocol, REQUEST_PLATFORM_TYPES } from '@/sheep/hooks/useApi';
+import { removeAllStorage, USER_KEY_OBJ, USER_LOGIN_TYPE_OBJ } from '@/sheep/hooks/useLogin';
+import { showAuthModal } from '@/sheep/hooks/useModal';
+import $platform from '@/sheep/platform';
+import $store from '@/sheep/store';
 
 const options = {
     // 显示操作成功消息 默认不显示
@@ -31,7 +32,7 @@ const options = {
 };
 
 // Loading全局实例
-let LoadingInstance = {
+const LoadingInstance = {
     target: null,
     count: 0,
 };
@@ -53,7 +54,7 @@ const http = new Request({
     method: 'GET',
     header: {
         Accept: 'text/json',
-        ['Content-Type']: 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
         platform: $platform.name,
     },
     // #ifdef APP-PLUS
@@ -90,10 +91,8 @@ http.interceptors.request.use(
         // 授权平台的token
         if (config?.custom?.isAuthPlatform) {
             const authToken = uni.getStorageSync(USER_KEY_OBJ.AUTH_PLATFORM_TOKEN);
-            if (authToken) config.header['Authorization'] = authToken;
-        } else {
-            if (token) config.header['Access-Token'] = token;
-        }
+            if (authToken) config.header.Authorization = authToken;
+        } else if (token) config.header['Access-Token'] = token;
         return config;
     },
     (error) => {
@@ -108,11 +107,11 @@ http.interceptors.response.use(
     (response) => {
         // 自动设置登陆令牌
         if (response.header['Access-Token'] || response.header.Authorization) {
-            //$store('user').setToken(response.header['Access-Token'] || response.header.Authorization);
+            // $store('user').setToken(response.header['Access-Token'] || response.header.Authorization);
         }
 
         response.config.custom.showLoading && closeLoading();
-        /*if (response.data.error !== 0) {
+        /* if (response.data.error !== 0) {
           if (response.config.custom.showError)
             uni.showToast({
               title: response.data.msg || '服务器开小差啦,请稍后再试~',
@@ -130,7 +129,7 @@ http.interceptors.response.use(
             title: response.config.custom.successMsg || response.data.msg,
             icon: 'none',
           });
-        }*/
+        } */
 
         // token过期
         if (
@@ -155,7 +154,7 @@ http.interceptors.response.use(
     },
     (error) => {
         const userStore = $store('user');
-        const isLogin = userStore.isLogin;
+        const { isLogin } = userStore;
         let errorMessage = '网络请求出错';
         if (error !== undefined) {
             switch (error.statusCode) {

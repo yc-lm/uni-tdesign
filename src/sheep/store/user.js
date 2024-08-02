@@ -1,6 +1,7 @@
+import { clone, cloneDeep } from 'lodash';
 import { defineStore } from 'pinia';
+
 import userApi from '@/sheep/api/user';
-import { cloneDeep, clone } from 'lodash';
 import { getUserBriefInfo, USER_KEY_OBJ } from '@/sheep/hooks/useLogin';
 
 // 默认用户信息
@@ -28,7 +29,7 @@ const user = defineStore({
         lastUpdateTime: 0, // 上次更新时间
         loginType: uni.getStorageSync(USER_KEY_OBJ.USER_LOGIN_TYPE) || '', // 登录方式
         platformHost: uni.getStorageSync(USER_KEY_OBJ.USER_PLATFORM_HOST) || '', // 用户登录平台的host
-        schoolOption: uni.getStorageSync(USER_KEY_OBJ.USER_SCHOOL_OPTION), //获取学校配置
+        schoolOption: uni.getStorageSync(USER_KEY_OBJ.USER_SCHOOL_OPTION), // 获取学校配置
         // 是否开启详情页图片占位
         isVideoPlaceholder: false,
         // 当前是什么版本：develop开发版、trial体验版、release正式版、gray灰度版（仅支付宝小程序支持），
@@ -50,10 +51,6 @@ const user = defineStore({
             this.userInfo = userInfo;
 
             return isBoolean ? true : userInfo;
-        },
-
-        // 获取分销商信息
-        async getAgentInfo() {
         },
 
         // 获取订单、优惠券等其他资产信息
@@ -109,8 +106,9 @@ const user = defineStore({
             if (this.lastUpdateTime + 5000 > nowTime) return;
 
             // 不用每次都刷新一次用户信息
-            //await this.getInfo();
+            // await this.getInfo();
             this.lastUpdateTime = nowTime;
+            // eslint-disable-next-line consistent-return
             return this.userInfo;
         },
 
@@ -125,7 +123,7 @@ const user = defineStore({
         // 登录后
         async loginAfter() {
             await this.updateUserData();
-            /*// 登录后设置全局分享参数
+            /* // 登录后设置全局分享参数
                   $share.getShareInfo();
                   // 提醒绑定手机号
                   if (app().platform.bind_mobile && !this.userInfo.verification?.mobile) {
@@ -138,7 +136,7 @@ const user = defineStore({
                     this.addShareLog({
                       ...shareLog,
                     });
-                  }*/
+                  } */
         },
 
         // 登出

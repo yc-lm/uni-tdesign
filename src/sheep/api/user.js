@@ -1,6 +1,6 @@
-import request from '@/sheep/request';
 import { REQUEST_PLATFORM_TYPES } from '@/sheep/hooks/useApi';
 import { DIFF_FROM_OBJ, getLoadingSetting } from '@/sheep/hooks/useLogin';
+import request from '@/sheep/request';
 
 export default {
     token: (data) =>
@@ -15,7 +15,7 @@ export default {
             },
             REQUEST_PLATFORM_TYPES.REQUEST_PLATFORM_USER,
         ),
-    //企业微信小程序绑定账号
+    // 企业微信小程序绑定账号
     qyUserBind: (data) => {
         const { isLoading, apiParams } = getLoadingSetting(data);
         return request(
@@ -28,9 +28,9 @@ export default {
                 },
             },
             REQUEST_PLATFORM_TYPES.REQUEST_PLATFORM_USER,
-        )
+        );
     },
-    profile: (data={}) => {
+    profile: (data = {}) => {
         const { isLoading } = getLoadingSetting(data);
         return request(
             {
@@ -42,7 +42,7 @@ export default {
                 },
             },
             REQUEST_PLATFORM_TYPES.REQUEST_PLATFORM_USER,
-        )
+        );
     },
     // 检测网络是否可达
     checkNetwork: () =>
@@ -59,7 +59,7 @@ export default {
         ),
     // 获取小程序的openid
     getOpenId: (data) => {
-        const { isLoading, apiParams } = getLoadingSetting(data,false);
+        const { isLoading, apiParams } = getLoadingSetting(data, false);
         return request({
             url: 'wx-login',
             method: 'POST',
@@ -74,7 +74,7 @@ export default {
         request({
             url: 'get-privacy',
             method: 'GET',
-            data: data,
+            data,
             custom: {
                 showLoading: true,
             },
@@ -84,7 +84,7 @@ export default {
         request({
             url: 'status',
             method: 'GET',
-            data: data,
+            data,
             custom: {
                 showLoading: false,
             },
@@ -95,7 +95,7 @@ export default {
             {
                 url: '/bmd/userCenterApi.php?api=wxUserBind&c=User',
                 method: 'POST',
-                data: data,
+                data,
                 custom: {
                     showLoading: true,
                 },
@@ -108,7 +108,7 @@ export default {
             {
                 url: '/bmd/jsonApi.php?api=getPlatformConfig',
                 method: 'GET',
-                data: data,
+                data,
             },
             REQUEST_PLATFORM_TYPES.REQUEST_PLATFORM_USER,
         ),
@@ -118,7 +118,7 @@ export default {
             {
                 url: '/bmd/userCenterApi.php?api=loginForMobile&c=User',
                 method: 'POST',
-                data: data,
+                data,
                 custom: {
                     showLoading: true,
                 },
@@ -131,35 +131,35 @@ export default {
             {
                 url: '/bmd/userCenterApi.php?api=studentRegister&c=User',
                 method: 'POST',
-                data: data,
+                data,
                 custom: {
                     showLoading: true,
                 },
             },
             REQUEST_PLATFORM_TYPES.REQUEST_PLATFORM_USER,
         ),
-    //获取微信绑定状态
+    // 获取微信绑定状态
     getWechatBindStatus: (data) =>
         request({
             url: 'get-bind-status',
             method: 'GET',
             data: { ...data, ...DIFF_FROM_OBJ },
         }),
-    //微信解绑
+    // 微信解绑
     setWechatUnBind: (data) =>
         request({
             url: 'wx-unbind',
             method: 'POST',
             data: { ...data, ...DIFF_FROM_OBJ },
         }),
-    //微信绑定
+    // 微信绑定
     setWechatBind: (data) =>
         request({
             url: 'wx-bind',
             method: 'POST',
             data: { ...data, ...DIFF_FROM_OBJ },
         }),
-    //获取学校配置
+    // 获取学校配置
     getSchoolOption: (data) =>
         request(
             {
@@ -172,7 +172,7 @@ export default {
             },
             REQUEST_PLATFORM_TYPES.REQUEST_PLATFORM_USER,
         ),
-    //退出登录
+    // 退出登录
     logout: () =>
         request(
             {
@@ -184,7 +184,7 @@ export default {
             },
             REQUEST_PLATFORM_TYPES.REQUEST_PLATFORM_USER,
         ),
-    //编辑用户信息
+    // 编辑用户信息
     editUserInfo: (data) =>
         request(
             {
@@ -197,7 +197,7 @@ export default {
             },
             REQUEST_PLATFORM_TYPES.REQUEST_PLATFORM_USER,
         ),
-    //修改密码
+    // 修改密码
     editUserPassword: (data) =>
         request(
             {

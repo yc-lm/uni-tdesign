@@ -1,11 +1,9 @@
 // #ifdef H5
-import service from './officialAccount';
 // #endif
-
 // #ifdef MP-WEIXIN
 import service from './miniProgram';
+import service from './officialAccount';
 // #endif
-
 // #ifdef APP-PLUS
 import service from './openPlatform';
 // #endif

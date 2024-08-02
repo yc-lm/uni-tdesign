@@ -1,0 +1,48 @@
+$minPosition: 0 !default;
+$maxPosition: 50 !default;
+$positionList: 60, 70, 80, 90, 100 !default;
+
+.relative {
+	position: relative;
+}
+.absolute {
+	position: absolute;
+}
+.fixed {
+	position: fixed;
+}
+.absolute-center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+@for $num from $minPosition through $maxPosition {
+	.t-#{$num} {
+		top: pxToRpx($num);
+	}
+	.r-#{$num} {
+		right: pxToRpx($num);
+	}
+	.l-#{$num} {
+		left: pxToRpx($num);
+	}
+	.b-#{$num} {
+		bottom: pxToRpx($num);
+	}
+}
+
+@each $num in $positionList {
+	.t-#{$num} {
+		top: pxToRpx($num);
+	}
+	.r-#{$num} {
+		right: pxToRpx($num);
+	}
+	.l-#{$num} {
+		left: pxToRpx($num);
+	}
+	.b-#{$num} {
+		bottom: pxToRpx($num);
+	}
+}

@@ -1,0 +1,120 @@
+//flex定位问题
+
+$minFlex: 0 !default;
+$maxFlex: 10 !default;
+.flex {
+  display: flex;
+}
+.flex-1{
+  flex:1
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-no-wrap {
+  flex-wrap: nowrap;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-stretch {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.flex-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flex-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-space-b {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-space-a {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.flex-end {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.align-start {
+  align-items: flex-start;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+.align-center {
+  align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-right {
+  justify-content: right;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+@for $num from $minFlex through $maxFlex {
+  .flex#{$num} {
+    flex: #{$num};
+  }
+}

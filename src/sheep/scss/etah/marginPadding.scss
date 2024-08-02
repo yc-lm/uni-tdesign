@@ -1,0 +1,81 @@
+$minMarginPadding : 0 !default;
+$maxMarginPadding : 32 !default;
+$marginPaddingList : 40,50,60,70,80,90,100,110,120,125,130,140,150 !default;
+
+@for $num from $minMarginPadding through $maxMarginPadding {
+    .m-t-#{$num}{
+        margin-top:pxToRpx($num);
+    }
+    .m-b-#{$num}{
+        margin-bottom:pxToRpx($num);
+    }
+    .m-l-#{$num}{
+        margin-left:pxToRpx($num);
+    }
+    .m-r-#{$num}{
+        margin-right:pxToRpx($num);
+    }
+    .m-#{$num}{
+        margin:pxToRpx($num);
+    }
+
+    .p-t-#{$num}{
+        padding-top:pxToRpx($num);
+    }
+    .p-b-#{$num}{
+        padding-bottom:pxToRpx($num);
+    }
+    .p-l-#{$num}{
+        padding-left:pxToRpx($num);
+    }
+    .p-r-#{$num}{
+        padding-right:pxToRpx($num);
+    }
+    .p-#{$num}{
+        padding:pxToRpx($num);
+    }
+}
+
+@each $num in $marginPaddingList{
+    .m-t-#{$num}{
+        margin-top:pxToRpx($num);
+    }
+    .m-b-#{$num}{
+        margin-bottom:pxToRpx($num);
+    }
+    .m-l-#{$num}{
+        margin-left:pxToRpx($num);
+    }
+    .m-r-#{$num}{
+        margin-right:pxToRpx($num);
+    }
+    .m-#{$num}{
+        margin:pxToRpx($num);
+    }
+
+    .p-t-#{$num}{
+        padding-top:pxToRpx($num);
+    }
+    .p-b-#{$num}{
+        padding-bottom:pxToRpx($num);
+    }
+    .p-l-#{$num}{
+        padding-left:pxToRpx($num);
+    }
+    .p-r-#{$num}{
+        padding-right:pxToRpx($num);
+    }
+    .p-#{$num}{
+        padding:pxToRpx($num);
+    }
+  }
+
+.m-l-a {
+    margin-left: auto;
+}
+.m-a {
+    margin: 0 auto;
+}
+.t-c{
+    text-align: center;
+}

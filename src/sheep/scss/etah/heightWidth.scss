@@ -1,0 +1,54 @@
+$minHeightWidth : 0 !default;
+$maxHeightWidth : 150 !default;
+$heightWidthList : 160,170,180,190,200,250,300,330,350,400,450,500,550,600,700,800,900,1000,1100,1200 !default;
+
+.w-100p {
+  width: 100%;
+}
+
+.h-100p {
+  height: 100%;
+}
+
+
+@for $num from $minHeightWidth through $maxHeightWidth {
+  .w-#{$num} {
+    width: pxToRpx($num);
+  }
+  .min-w-#{$num} {
+    min-width: pxToRpx($num);
+  }
+  .max-w-#{$num} {
+    max-width: pxToRpx($num);
+  }
+  .h-#{$num} {
+    height: pxToRpx($num);
+  }
+  .min-h-#{$num} {
+    min-height: pxToRpx($num);
+  }
+  .max-h-#{$num} {
+    max-height: pxToRpx($num);
+  }
+}
+
+@each $num in $heightWidthList {
+  .w-#{$num} {
+    width: pxToRpx($num);
+  }
+  .min-w-#{$num} {
+    min-width: pxToRpx($num);
+  }
+  .max-w-#{$num} {
+    max-width: pxToRpx($num);
+  }
+  .h-#{$num} {
+    height: pxToRpx($num);
+  }
+  .min-h-#{$num} {
+    min-height: pxToRpx($num);
+  }
+  .max-h-#{$num} {
+    max-height: pxToRpx($num);
+  }
+}

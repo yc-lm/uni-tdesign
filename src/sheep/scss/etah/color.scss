@@ -1,0 +1,63 @@
+$minOpacity: 0 !default;
+$maxOpacity: 10 !default;
+@use 'sass:math';
+@import "../var.scss";
+
+$color-list: (
+                ('b-title', $title),
+                ('b-white', $white),
+                ('b-black', $black),
+                ('b-red', $red),
+                ('b-blue', $blue),
+                ('b-green', $green),
+                ('b-orange', $orange),
+) !default;
+
+@each $label, $value in $color-list {
+  .col-#{$label} {
+    color: $value
+  }
+;
+  .bg-#{$label} {
+    background: $value;
+  }
+}
+
+@mixin title-color-opacity($opacity) {
+  color: $title; /*Fallback */
+  color: rgba($title, math.div($opacity, 10));
+}
+
+@mixin title-background-opacity($opacity) {
+  background-color: $title; /*Fallback */
+  background-color: rgba($title, math.div($opacity, 10));
+}
+
+@mixin title-white-color-opacity($opacity) {
+  color: $white; /*Fallback */
+  color: rgba($white, math.div($opacity, 10));
+}
+
+@mixin title-white-background-opacity($opacity) {
+  background-color: $white; /*Fallback */
+  background-color: rgba($white, math.div($opacity, 10));
+}
+
+// bTitle
+@for $num from $minOpacity through $maxOpacity {
+  .col-b-title-#{$num} {
+    @include title-color-opacity($num);
+  }
+  .col-bg-title-#{$num} {
+    @include title-background-opacity($num);
+  }
+}
+
+@for $num from $minOpacity through $maxOpacity {
+  .col-b-white-#{$num} {
+    @include title-white-color-opacity($num);
+  }
+  .col-bg-white-#{$num} {
+    @include title-white-background-opacity($num);
+  }
+}
